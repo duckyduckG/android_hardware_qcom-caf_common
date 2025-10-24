@@ -289,6 +289,7 @@ endif
 # Enable Supported halls on UM 4.9 platforms with kernel 4.19 upgrade
 ifeq ($(TARGET_KERNEL_VERSION),4.19)
 ifneq ($(filter $(UM_4_9_FAMILY),$(TARGET_BOARD_PLATFORM)),)
+    SOONG_CONFIG_qtidisplay_target_no_camera_custom_format := true
     SOONG_CONFIG_qtidisplay_gralloc4 := true
 endif
 endif
