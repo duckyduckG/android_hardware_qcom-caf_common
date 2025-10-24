@@ -286,6 +286,13 @@ ifneq ($(filter $(UM_4_14_FAMILY) $(UM_4_19_FAMILY) $(UM_4_19_LEGACY_FAMILY) $(U
     SOONG_CONFIG_qtidisplay_gralloc4 := true
 endif
 
+# Enable Supported halls on UM 4.9 platforms with kernel 4.19 upgrade
+ifeq ($(TARGET_KERNEL_VERSION),4.19)
+ifneq ($(filter $(UM_4_9_FAMILY),$(TARGET_BOARD_PLATFORM)),)
+    SOONG_CONFIG_qtidisplay_gralloc4 := true
+endif
+endif
+
 # Select AR variant of A-HAL dependencies
 ifneq ($(filter $(UM_5_10_FAMILY) $(UM_5_15_FAMILY) $(UM_6_1_FAMILY) $(UM_6_6_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     TARGET_USES_QCOM_AUDIO_AR ?= true
