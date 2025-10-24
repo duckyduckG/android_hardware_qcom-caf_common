@@ -286,6 +286,12 @@ ifneq ($(filter $(UM_4_14_FAMILY) $(UM_4_19_FAMILY) $(UM_4_19_LEGACY_FAMILY) $(U
     SOONG_CONFIG_qtidisplay_gralloc4 := true
 endif
 
+ifeq ($(TARGET_KERNEL_VERSION),4.19)
+ifneq ($(filter $(UM_4_14_FAMILY),$(TARGET_BOARD_PLATFORM)),)
+    SOONG_CONFIG_qtidisplay_target_no_camera_custom_format := true
+endif
+endif
+
 # Enable Gralloc4 on sdm845 devices with kernel 4.19
 ifneq ($(filter sdm845,$(TARGET_BOARD_PLATFORM)),)
 ifeq ($(TARGET_KERNEL_VERSION),4.19)
