@@ -286,9 +286,15 @@ ifneq ($(filter $(UM_4_14_FAMILY) $(UM_4_19_FAMILY) $(UM_4_19_LEGACY_FAMILY) $(U
     SOONG_CONFIG_qtidisplay_gralloc4 := true
 endif
 
+ifneq ($(filter 4.19 5.4,$(TARGET_KERNEL_VERSION)),)
+ifneq ($(filter $(UM_4_14_FAMILY),$(TARGET_BOARD_PLATFORM)),)
+    SOONG_CONFIG_qtidisplay_target_no_camera_custom_format := true
+endif
+endif
+
 # Enable Gralloc4 on sdm845 devices with kernel 4.19
 ifneq ($(filter sdm845,$(TARGET_BOARD_PLATFORM)),)
-ifeq ($(TARGET_KERNEL_VERSION),4.19)
+ifneq ($(filter 4.19 5.4,$(TARGET_KERNEL_VERSION)),)
     SOONG_CONFIG_qtidisplay_gralloc4 := true
     SOONG_CONFIG_qtidisplay_target_no_camera_custom_format := true
 endif
@@ -367,13 +373,19 @@ else ifneq ($(filter $(UM_4_4_HAL_FAMILY),$(TARGET_BOARD_PLATFORM)),)
 else ifneq ($(filter $(UM_4_19_LEGACY_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     QCOM_HARDWARE_VARIANT := sdm660
 else ifneq ($(filter $(UM_4_9_FAMILY),$(TARGET_BOARD_PLATFORM)),)
-    ifneq ($(TARGET_KERNEL_VERSION), 4.19)
-        QCOM_HARDWARE_VARIANT := sdm845
-    else
+    ifeq ($(TARGET_KERNEL_VERSION),4.19)
         QCOM_HARDWARE_VARIANT := sm8250
+    else ifeq ($(TARGET_KERNEL_VERSION),5.4)
+        QCOM_HARDWARE_VARIANT := sm8350
+    else
+        QCOM_HARDWARE_VARIANT := sdm845
     endif
 else ifneq ($(filter $(UM_4_14_FAMILY),$(TARGET_BOARD_PLATFORM)),)
-    QCOM_HARDWARE_VARIANT := sm8150
+    ifeq ($(TARGET_KERNEL_VERSION),5.4)
+        QCOM_HARDWARE_VARIANT := sm8350
+    else
+        QCOM_HARDWARE_VARIANT := sm8150
+    endif
 else ifneq ($(filter $(UM_4_19_FAMILY),$(TARGET_BOARD_PLATFORM)),)
     QCOM_HARDWARE_VARIANT := sm8250
 else ifneq ($(filter $(UM_5_4_FAMILY),$(TARGET_BOARD_PLATFORM)),)
