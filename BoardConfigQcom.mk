@@ -288,9 +288,11 @@ ifneq ($(filter $(UM_4_14_FAMILY) $(UM_4_19_FAMILY) $(UM_4_19_LEGACY_FAMILY) $(U
     SOONG_CONFIG_qtidisplay_gralloc4 := true
 endif
 
-ifeq ($(TARGET_KERNEL_VERSION),4.19)
+# Enable needed Configs for UM_414_FAMILY with 4.19 kernel upgrade
 ifneq ($(filter $(UM_4_14_FAMILY),$(TARGET_BOARD_PLATFORM)),)
+ifeq ($(TARGET_KERNEL_VERSION),4.19)
     SOONG_CONFIG_qtidisplay_target_no_camera_custom_format := true
+    SOONG_CONFIG_qtidisplay_target_uses_legacy_buffer_align := true
 endif
 endif
 
