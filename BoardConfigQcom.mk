@@ -188,6 +188,7 @@ SOONG_CONFIG_qtidisplay += \
     target_kernel_version \
     target_no_camera_custom_format \
     target_no_raw10_custom_format \
+    target_uses_legacy_buffer_align \
     target_uses_aligned_ycbcr_height \
     target_uses_aligned_ycrcb_height \
     target_uses_unaligned_nv21_zsl \
@@ -219,6 +220,7 @@ SOONG_CONFIG_qtidisplay_wide_color ?= false
 SOONG_CONFIG_qtidisplay_target_kernel_version ?= 0
 SOONG_CONFIG_qtidisplay_target_no_camera_custom_format ?= false
 SOONG_CONFIG_qtidisplay_target_no_raw10_custom_format ?= false
+SOONG_CONFIG_qtidisplay_target_uses_legacy_buffer_align ?= false
 SOONG_CONFIG_qtidisplay_target_uses_aligned_ycbcr_height ?= false
 SOONG_CONFIG_qtidisplay_target_uses_aligned_ycrcb_height ?= false
 SOONG_CONFIG_qtidisplay_target_uses_unaligned_nv21_zsl ?= false
